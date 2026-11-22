@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Le CO₂ expliqué par Carbo</title>
+<style>
+:root{--bg:#eaf6ff;--fg:#12324a;--card:#fff;--ac:#1e88e5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a26;--fg:#e8f3fb;--card:#17283a;--ac:#6ab7ff}}
+:root[data-theme="dark"]{--bg:#0e1a26;--fg:#e8f3fb;--card:#17283a;--ac:#6ab7ff}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:12px;box-sizing:border-box}
+h1{font-size:20px;margin:0;text-align:center}
+#st{width:100%;max-width:520px;background:var(--card);border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.2);overflow:hidden}
+svg{width:100%;display:block;background:linear-gradient(#bfe6ff,#e8f7ff)}
+@media(prefers-color-scheme:dark){svg{background:linear-gradient(#14304a,#1d4466)}}
+#bb{padding:14px 16px;font-size:18px;line-height:1.45;min-height:110px}
+#ct{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+button{font-size:17px;padding:10px 16px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-weight:700}
+#pg{font-size:14px;opacity:.7}
+.bob{animation:bob 1.6s ease-in-out infinite}@keyframes bob{50%{transform:translate(var(--x),calc(var(--y) - 5px))}}
+.up{animation:up 3s linear infinite}@keyframes up{0%{opacity:0;transform:translateY(0)}20%{opacity:1}100%{opacity:0;transform:translateY(-70px)}}
+.bn{animation:bn 1.5s ease-in-out infinite}@keyframes bn{50%{transform:translateY(-8px)}}
+text{font-family:system-ui,sans-serif}
+</style></head><body>
+<h1>🌍 Le CO₂ expliqué par Carbo</h1>
+<div id="st"><svg id="sv" viewBox="0 0 300 180"></svg><div id="bb"></div></div>
+<div id="ct"><button id="pv">◀</button><button id="pl">▶ Lecture</button><button id="nx">▶</button><button id="vo">🔊 Voix : non</button></div>
+<div id="pg"></div>
+<script>
+const C=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><g class="bn"><circle cx="-26" cy="0" r="11" fill="#e53935"/><circle cx="26" cy="0" r="11" fill="#e53935"/><circle r="17" fill="#37474f"/><circle cx="-6" cy="-4" r="4" fill="#fff"/><circle cx="6" cy="-4" r="4" fill="#fff"/><circle cx="-5" cy="-4" r="1.8" fill="#000"/><circle cx="7" cy="-4" r="1.8" fill="#000"/><path d="M-6 6q6 5 12 0" stroke="#fff" stroke-width="2" fill="none"/></g></g>`;
+const D=(x,y,d)=>`<g class="up" style="animation-delay:${d}s"><text x="${x}" y="${y}" font-size="11" font-weight="700" fill="#455a64">CO₂</text></g>`;
+const T=(x,y,t,c,s)=>`<text x="${x}" y="${y}" font-size="${s||12}" font-weight="700" fill="${c||'#12324a'}" text-anchor="middle">${t}</text>`;
+const SUN=(x,y)=>`<circle cx="${x}" cy="${y}" r="16" fill="#ffc107"/>`;
+const S=[
+{t:"Salut ! Moi, c’est Carbo, une molécule de CO₂ : un atome de carbone et deux d’oxygène. Je suis invisible, mais je joue un grand rôle sur Terre !",s:()=>C(150,85,1.8)+T(150,150,'C + O + O = CO₂','#12324a',14)},
+{t:"D’où je viens ? Vous me fabriquez en respirant ! Mais aussi les volcans, les voitures, les usines et les chauffages brûlent du carbone et me libèrent dans l’air.",s:()=>C(40,120,.8)+`<polygon points="100,170 130,110 160,170" fill="#8d6e63"/><rect x="190" y="130" width="40" height="40" fill="#78909c"/><rect x="198" y="112" width="8" height="20" fill="#546e7a"/><rect x="250" y="150" width="40" height="14" rx="4" fill="#ef5350"/><circle cx="260" cy="168" r="5" fill="#333"/><circle cx="282" cy="168" r="5" fill="#333"/>`+D(120,100,0)+D(200,95,1)+D(262,130,2)},
+{t:"Heureusement, les plantes me mangent ! Avec la lumière du soleil, elles me transforment en sucre pour grandir et rejettent de l’oxygène : c’est la photosynthèse.",s:()=>SUN(35,35)+`<rect x="165" y="110" width="12" height="60" fill="#795548"/><circle cx="171" cy="90" r="45" fill="#43a047"/>`+C(60,120,.7)+`<path d="M105 120 H 135" stroke="#12324a" stroke-width="3" marker-end="url(#a)"/><path d="M130 100 L 150 100" stroke="#12324a" stroke-width="3"/>`+T(250,70,'O₂ 💨','#1565c0',16)+T(100,155,'CO₂ →','#12324a',12)},
+{t:"Autour de la Terre, je forme une couverture invisible. Je retiens une partie de la chaleur du soleil : c’est l’effet de serre. Sans lui, il ferait environ −18 °C en moyenne au lieu de +15 °C !",s:()=>SUN(40,30)+`<path d="M60 40 L120 140" stroke="#ffb300" stroke-width="3"/><rect x="0" y="95" width="300" height="22" fill="#90a4ae" opacity=".5"/>`+D(30,112,0)+D(110,112,1)+D(190,112,2)+D(260,112,.5)+`<path d="M120 140 L180 100" stroke="#e53935" stroke-width="3" stroke-dasharray="5 4"/><ellipse cx="150" cy="190" rx="170" ry="50" fill="#1e88e5"/>`+T(235,150,'chaleur piégée','#e53935',12)},
+{t:"Le problème : en brûlant du pétrole, du charbon et du gaz, on envoie beaucoup trop de CO₂. Il y en avait environ 280 ppm avant l’ère industrielle, et plus de 420 ppm aujourd’hui. La planète se réchauffe de plus d’1 °C.",s:()=>`<rect x="50" y="90" width="60" height="70" fill="#66bb6a"/><rect x="170" y="45" width="60" height="115" fill="#ef5350"/>`+T(80,82,'280 ppm','#12324a',13)+T(200,37,'420+ ppm','#12324a',13)+T(80,175,'avant','#12324a',11)+T(200,175,'aujourd’hui','#12324a',11)+`<text x="255" y="40" font-size="26">🌡️</text>`},
+{t:"Bonne nouvelle : chacun peut aider ! Marcher ou prendre le vélo, éteindre ce qu’on n’utilise pas, éviter le gaspillage, soutenir les énergies propres et planter des arbres. Merci d’avoir écouté, à bientôt !",s:()=>C(150,50,1)+`<text x="40" y="140" font-size="34">🚲</text><text x="105" y="140" font-size="34">🌳</text><text x="170" y="140" font-size="34">☀️</text><text x="230" y="140" font-size="34">💡</text>`+T(150,172,'Petits gestes, grand effet !','#12324a',13)}];
+const sv=document.getElementById('sv'),bb=document.getElementById('bb'),pg=document.getElementById('pg');
+let i=0,auto=false,voice=false,tm=null,ty=null;
+function speak(t){try{speechSynthesis.cancel();if(voice){const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';speechSynthesis.speak(u)}}catch(e){}}
+function show(n){i=(n+S.length)%S.length;clearTimeout(tm);clearInterval(ty);sv.innerHTML=S[i].s();pg.textContent=(i+1)+' / '+S.length;
+ const t=S[i].t;let k=0;bb.textContent='';speak(t);ty=setInterval(()=>{bb.textContent=t.slice(0,++k);if(k>=t.length){clearInterval(ty);if(auto)tm=setTimeout(()=>{if(i<S.length-1)show(i+1);else{auto=false;document.getElementById('pl').textContent='▶ Lecture'}},voice?4500:2500)}},28)}
+document.getElementById('nx').onclick=()=>show(i+1);document.getElementById('pv').onclick=()=>show(i-1);
+document.getElementById('pl').onclick=function(){auto=!auto;this.textContent=auto?'⏸ Pause':'▶ Lecture';show(auto&&i==S.length-1?0:i)};
+document.getElementById('vo').onclick=function(){voice=!voice;this.textContent=voice?'🔊 Voix : oui':'🔊 Voix : non';show(i)};
+show(0);
+</script></body></html>
